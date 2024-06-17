@@ -148,7 +148,7 @@ public class Settings {
 	// ====================================================================
 	public class UrlAudio {
 		
-		private String ruta = "src/archivosAudio/";
+		private String ruta = "media/";
 		
 		private String intermision = "pacmanintermision.wav";
 		private String preparado = "pacmaninicionivel.wav";

@@ -4,6 +4,7 @@ public class Settings {
 	
 	public final int FPS = 60;
 	public final int NUMERO_FANTASMAS = 4;
+	public final int DURACION_MUSICA_PREPARADO = 4200;
 
 	// iniSprites {x, y, id, direccion (0 dcha, 1 izda, 2 up 3 do)}
 	private int[][] iniSprites = { { 9, 4, 0, 0 }, { 2, 8, 0, 0 }, { 5, 8, 1, 0 }, { 12, 8, 2, 1 }, { 15, 8, 3, 1 } };
@@ -235,7 +236,7 @@ public class Settings {
 				{ 9, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 9 },
 				{ 9, 1, 9, 9, 1, 9, 1, 9, 9, 9, 9, 9, 1, 9, 1, 9, 9, 1, 9 },
 
-				{ 9, 1, 1, 1, 1, 9, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1, 1, 9 },
+				{ 9, 1, 1, 1, 1, 9, 1, 1, 1, 9, 1, 1, 1, 9, 1, 1, 1, 1, 9 },
 				{ 9, 9, 9, 9, 1, 9, 9, 9, 1, 9, 1, 9, 9, 9, 1, 9, 9, 9, 9 },
 				{ 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9 },
 

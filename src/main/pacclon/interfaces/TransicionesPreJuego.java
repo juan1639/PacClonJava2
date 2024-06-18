@@ -11,8 +11,8 @@ public interface TransicionesPreJuego {
 		
 		long checkMiliSec = System.currentTimeMillis();
 		
-		// 4200ms = duracion 'musica preparado'...
-		if (Ventana.getMiliSec() + 4200 <= checkMiliSec) {
+		// JUEGO COMIENZA CUANDO TERMINA 'Musica PREPARADO'...
+		if (Ventana.getMiliSec() + settings.DURACION_MUSICA_PREPARADO <= checkMiliSec) {
 
 			settings.estado.setPreparado(false);
 			settings.estado.setEnJuego(true);

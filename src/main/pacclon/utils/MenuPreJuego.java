@@ -14,8 +14,9 @@ public class MenuPreJuego {
 	private Boolean existeOptionPane = false;
 
 	public void preJuegoDialog(Settings settings, int newGame, int gameoverPane, Ventana ventana, String txt,
-			String tit, Sonidos sonido, Timer timer) {
+			String tit, Sonidos sonido) {
 		
+		// ******************+ OPTION-PANE PRE-JUEGO ******************************
 		if (!settings.estado.isPreJuego() && !settings.estado.isGameOver()) return;
 		
 		if (settings.estado.isPreJuego() && !existeOptionPane) {
@@ -24,11 +25,12 @@ public class MenuPreJuego {
 			newGame = JOptionPane.showConfirmDialog(ventana, txt, tit, JOptionPane.CLOSED_OPTION);
 
 			if (newGame == JOptionPane.OK_OPTION) {
-				cambiarAestadoPreparado(settings, ventana, sonido, timer);
+				cambiarAestadoPreparado(settings, ventana, sonido);
 			}
 
 		} else if (settings.estado.isGameOver()) {
-
+			
+			// **************** OPTION-PANE GAMEOVER *******************************
 			gameoverPane = JOptionPane.showConfirmDialog(ventana, "Volver a jugar?");
 
 			if (gameoverPane == JOptionPane.NO_OPTION || gameoverPane == JOptionPane.CANCEL_OPTION) {
@@ -43,7 +45,7 @@ public class MenuPreJuego {
 		}
 	}
 
-	public void cambiarAestadoPreparado(Settings settings, Ventana ventana, Sonidos sonido, Timer timer) {
+	public void cambiarAestadoPreparado(Settings settings, Ventana ventana, Sonidos sonido) {
 
 		settings.estado.setPreJuego(false);
 		settings.estado.setPreparado(true);
@@ -56,10 +58,6 @@ public class MenuPreJuego {
 		sonido.playSonido();
 
 		ventana.instanciarTxtPreparado();
-
-		timer.stop();
-		timer = new Timer(4200, ventana);
-		timer.start();
-		timer.setRepeats(false);
+		Ventana.setMiliSec(System.currentTimeMillis());
 	}
 }

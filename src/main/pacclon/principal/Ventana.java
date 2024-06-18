@@ -15,6 +15,7 @@ import javax.swing.Timer;
 
 import main.pacclon.colisiones.Colisiones;
 import main.pacclon.interfaces.IResetControles;
+import main.pacclon.interfaces.TransicionesPreJuego;
 import main.pacclon.marcadores.Marcadores;
 import main.pacclon.settings.Settings;
 import main.pacclon.audio.Sonidos;
@@ -25,7 +26,7 @@ import main.pacclon.sprites.Puntitos;
 import main.pacclon.utils.AreaTexto;
 import main.pacclon.utils.MenuPreJuego;
 
-public class Ventana extends JPanel implements ActionListener, IResetControles, Colisiones {
+public class Ventana extends JPanel implements ActionListener, IResetControles, Colisiones, TransicionesPreJuego {
 	
 	private static final long serialVersionUID = 5143709932637106557L;
 	
@@ -51,7 +52,6 @@ public class Ventana extends JPanel implements ActionListener, IResetControles, 
 	
 	private Timer timer;
 	private static long miliSec;
-	private Boolean playerStart = false;
 	
 	public Ventana() {
 
@@ -141,27 +141,6 @@ public class Ventana extends JPanel implements ActionListener, IResetControles, 
 		Toolkit.getDefaultToolkit().sync();
 	}
 	
-	public void cambiarAestadoEnJuego() {
-
-		if (!settings.estado.isPreparado()) return;
-
-		settings.estado.setPreparado(false);
-		settings.estado.setEnJuego(true);
-		playerStart = true;
-	}
-	
-	public void setPlayerStart() {
-		
-		if (!playerStart) return;
-		
-		playerStart = false;
-		txtPreparado = null;
-		
-		timer = new Timer((int) (1000 / settings.FPS), this);
-		timer.start();
-		timer.setRepeats(true);
-	}
-	
 	public Boolean checkIsNivelSuperado() {
 		
 		int contador = settings.laberinto.getContadorPuntitos();
@@ -182,14 +161,15 @@ public class Ventana extends JPanel implements ActionListener, IResetControles, 
 	public void actionPerformed(ActionEvent e) {
 		
 		preJuegoPane.preJuegoDialog(settings, newGame, gameoverPane, this,
-				"Comenzar nueva partida...", "COMENZAR", sonido, timer);
+				"Comenzar nueva partida...", "COMENZAR", sonido);
 		
-		setPlayerStart();
-		cambiarAestadoEnJuego();
+		cambiarAestadoEnJuego(settings);
 
 		if (settings.estado.isEnJuego()) {
 			// check SI Re-instanciarPacMan&Fantasmas
 			checkReInstanciarPacmanYFantasmas();
+			
+			if (txtPreparado != null) txtPreparado = null;
 			
 			checkColisionesVsFantasmas();
 			
